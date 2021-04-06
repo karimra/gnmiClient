@@ -42,3 +42,4 @@ jobs:
           args: release --rm-dist -f .goreleaser.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FURY_TOKEN: ${{ secrets.FURYPUSHTOKEN }}

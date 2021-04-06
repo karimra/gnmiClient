@@ -38,6 +38,12 @@ checksum:
   name_template: "checksums.txt"
 snapshot:
   name_template: "{{ .Tag }}"
+publishers:
+  - name: fury.io deb/rpm packages
+    ids:
+      - gnmic # this id belongs to nfpm section and is used to only upload artifacts from nfpm
+    dir: "{{ dir .ArtifactPath }}"
+    cmd: curl -F package=@{{ .ArtifactName }} https://{{ .Env.FURY_TOKEN }}@push.fury.io/netdevops/
 changelog:
   sort: asc
   filters:

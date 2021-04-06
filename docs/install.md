@@ -4,7 +4,7 @@
 To download & install the latest release the following automated [installation script](https://github.com/karimra/gnmic/blob/master/install.sh) can be used:
 
 ```bash
-sudo curl -sL https://github.com/karimra/gnmic/raw/master/install.sh | sudo bash
+sudo bash -c "$(curl -sL https://github.com/karimra/gnmic/raw/master/install.sh)"
 ```
 
 As a result, the latest `gnmic` version will be installed in the `/usr/local/bin` directory and the version information will be printed out.
@@ -23,12 +23,29 @@ Installation complete!
 
 To install a specific version of `gnmic`, provide the version with `-v` flag to the installation script:
 ```bash
-sudo curl -sL https://github.com/karimra/gnmic/raw/master/install.sh | sudo bash -s -- -v 0.5.0
+sudo bash -c "$(curl -sL https://github.com/karimra/gnmic/raw/master/install.sh)" -- -v 0.5.0
 ```
 
 #### Packages
 Linux users running distributives with support for `deb`/`rpm` packages can install `gnmic` using pre-built packages:
 
+=== "APT"
+    ```bash
+    echo "deb [trusted=yes] https://apt.fury.io/netdevops/ /" | \
+    sudo tee -a /etc/apt/sources.list.d/netdevops.list
+
+    apt update && apt install gnmic
+    ```
+=== "YUM"
+    ```
+    yum-config-manager --add-repo=https://yum.fury.io/netdevops/ && \
+    echo "gpgcheck=0" | sudo tee -a /etc/yum.repos.d/yum.fury.io_netdevops_.repo
+
+    yum install gnmic
+    ```
+
+
+The package can also be installed directly, without using a repository:
 ```
 sudo curl -sL https://github.com/karimra/gnmic/raw/master/install.sh | sudo bash -s -- --use-pkg
 ```
@@ -43,6 +60,8 @@ gnmic version upgrade
 # upgrade using package
 gnmic version upgrade --use-pkg
 ```
+
+Users, who leverage APT/YUM repository can use `apt`/`yum` utilities to perform upgrades.
 
 ### Windows
 Windows users should use [WSL](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) on Windows and install the linux version of the tool.
